@@ -1,0 +1,272 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 8, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+
+    "margin": "6 6 6 6",
+
+    //////////////////// APPS
+
+    "modules-left": [
+	"hyprland/window",
+	"wlr/taskbar"
+	//"custom/kitty",
+	//"custom/dolphin",
+	//"custom/chrome",
+	//"custom/discord",
+	//"custom/spotify"
+    ],
+
+    "custom/kitty": {
+	"format": "  ",
+	"on-click": "kitty"
+    },
+
+    "custom/dolphin": {
+	"format": "  ",
+	"on-click": "dolphin"
+    },
+
+    "custom/chrome": {
+	"format": "  ",
+	"on-click": "flatpak run com.google.Chrome"
+    },
+
+    "custom/discord": {
+	"format": "  ",
+	"on-click": "flatpak run com.discordapp.Discord"
+    },
+
+    "custom/spotify": {
+	"format": "  ",
+	"on-click": "flatpak run com.spotify.Client"
+    },
+
+    ////////////////////
+
+    "modules-center": [
+	"custom/lrcsnc"
+	//"hyprland/window",    
+    ],
+    "modules-right": [
+	"tray",
+	//"custom/lrcsnc",
+	// "custom/clipboard",
+	"custom/reset",
+	"pulseaudio"
+	// "custom/reset"
+    ],
+
+    "custom/reset": {
+	"exec": "rate=\"$(grep -h rate: /proc/asound/card?/pcm??/sub?/hw_params)\"; array=($rate); echo ${array[1]}",
+	"interval": 1,
+	"format": "{} kHz",
+	"on-click": "resetwaybar.sh"
+    },
+
+    // Modules configuration
+    // "sway/workspaces": {
+    //     "disable-scroll": true,
+    //     "all-outputs": true,
+    //     "warp-on-scroll": false,
+    //     "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
+    // },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+   
+    "custom/lrcsnc": {
+        "exec": "/usr/bin/lrcsnc",
+        //"return-type": "json",
+	"restart-interval": 1,
+        "hide-empty-text": true,
+        "max-length": 100,
+        "tooltip": true,
+        "escape": true,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
+
+
+    "wlr/taskbar": {
+	"icon-size": 30,
+	"format": " {icon} ", 
+	"all-outputs": true,
+	"on-click": "activate",
+	"sort-by-app-id": true,
+	
+    },
+
+    "custom/clipboard": {
+	"format": "",
+	"on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+    },
+
+    "hyprland/window": {
+	"format": "",
+	"icon": true
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10,
+        "icons": {
+           "TelegramDesktop": "~/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%e %b %Y | %H:%M:%S}",
+	"interval": 1
+    },
+    "cpu": {
+        "format": "Current CPU Usage: {usage}% {icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} ",
+	"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "tooltip": true,
+	"interval": 1
+    },
+    "memory": {
+        "format": "Used Physical Memory: {used} GiB ",
+	"tooltip": true,
+	"interval": 1
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+},
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} | {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "alsa_output.usb-Topping_D90_MQA-00.HiFi__Headphones__sink":"D90",
+	    "alsa_output.usb-BEHRINGER_UMC204HD_192k-00.Direct__Direct__sink":""
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/power": {
+        "format" : " ⏻ ",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		"menu-actions": {
+			"shutdown": "shutdown",
+			"reboot": "reboot"
+		}
+    }
+}
