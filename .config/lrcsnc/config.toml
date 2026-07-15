@@ -39,7 +39,7 @@ multiplier = " %value%x"
 not-playing = ""
 no-lyrics = ""
 no-synced-lyrics = ""
-loading-lyrics = "uhhh..."
+loading-lyrics = "えっと..."
 error-message = " An error occured! Check logs for info!"
 
 [client.format.instrumental]

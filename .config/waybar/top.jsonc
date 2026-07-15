@@ -22,7 +22,7 @@
     "modules-right": [
 	"custom/gputemp",
 	"temperature",
-	"temperature#again",
+//	"temperature#again",
 	"clock" 
     ],
     // Modules configuration
@@ -110,7 +110,8 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%e %b %Y | %H:%M:%S}",
+        //"format": "{:%e %b %Y | %H:%M:%S}",
+	"format": "{:%Y年 %m月 %d日 | %H:%M:%S}",
 	"interval": 1
     },
     "cpu": {
@@ -127,8 +128,8 @@
 
     "custom/gputemp": {
 	"format": "GPU: {text}°C",
-	"exec": "/etc/xdg/waybar/gputemp.sh",
-	"return-type": "json",
+	"exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
+	"return-type": "stdout",
 	"restart-interval": 1
     },
 
@@ -141,7 +142,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         // "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "CPU (TCTL): {temperatureC}°C",
+        "format": "CPU: {temperatureC}°C",
         "format-icons": ["", "", ""],
 
 	"interval":1
