@@ -2,9 +2,11 @@
 @define-color active #36096C;
 @define-color background #210642;
 
+@import 'mocha.css';
+
 * {
   font-size: 16px;
-  font-family: "Arial";
+  font-family: "Inter";
   min-width: 8px;
   min-height: 0px;
   border: none;
@@ -13,10 +15,10 @@
   padding: 0px;
 }
 
-window#waybar {
+window#waybar.top {
   /*transition-property: background-color;
   transition-duration: 0.5s;*/
-  border-radius: 0px;
+  border-radius: 100px;
   border: 0px solid alpha(#cba6f7, 0);
   background: alpha(@background, 0);
   color: #cba6f7;
@@ -49,20 +51,20 @@ tooltip label {
 }
 
 .module {
-  background: #0C0217;
-  border-radius: 8px;
-  margin: 6px 1px 6px 1px;
-  padding: 0px 4px 0px 4px;
-  box-shadow: 0 1.5;
+  background: #1e1e2e;
+  border-radius: 100px;
+  margin: 4px 1px 4px 1px;
+  padding: 0px 8px 0px 8px;
+  /*box-shadow: 0 0;*/
 }
 
 #tray {
-  background: #0C0217;
+  background: #1e1e2e;
 }
 
 .module button:hover {
   background: #4B0D96;
-}
+}a S
 
 /*
 .modules-right {
@@ -169,10 +171,8 @@ tooltip label {
 }
 
 #workspaces {
-  margin: 0px 12px 0px 12px;
-  padding: 4px 12px 4px 12px;
-  border-radius: 8px;
   box-shadow: none;
+  font-size: 10px;
 }
 
 #workspaces button {
@@ -181,9 +181,10 @@ tooltip label {
   color: @foreground;
   background: transparent;
   border-radius: 4px;
-  padding: 0px 6px 0px 6px;
+  padding: 0px 2px 0px 2px;
   color: alpha(@foreground, 0.3);
   font-weight: normal;
+  font-size: 10px;
 }
 
 #workspaces button.urgent {
@@ -241,7 +242,7 @@ tooltip label {
 
 #clock {
   font-weight: bold;
-  padding: 4px 2px 2px 2px;
+  /*padding: 4px 2px 2px 2px;*/
 }
 
 #pulseaudio.mic {
@@ -306,6 +307,7 @@ tooltip label {
 
 #custom-power {
   font-size: 25px;
+  padding: 0px 15px;
   color: #f38ba8;
 }
 
@@ -333,9 +335,9 @@ tooltip label {
   font-weight: normal;
 }
 
-#clock {
+/*#clock {
   color: #ea76cb;
-}  
+}  */
 
 #custom-clipboard,
 #pulseaudio {

@@ -2,7 +2,7 @@
 {
     // "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 8, // Waybar height (to be removed for auto height)
+    "height": 4, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
 
@@ -11,19 +11,17 @@
     // Choose the order of the modules
     "modules-left": [
 	"custom/power",
-	"cava",
-	"memory",
-	"cpu",
-	"network"
+    "hyprland/workspaces",
+	"wlr/taskbar"
     ],
     "modules-center": [
-        "hyprland/workspaces"
+        "clock"
     ],
     "modules-right": [
+    "memory",
 	"custom/gputemp",
 	"temperature",
-//	"temperature#again",
-	"clock" 
+    "pulseaudio"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -51,6 +49,28 @@
             "unlocked": ""
         }
     },
+    
+    "wlr/taskbar": {
+	"icon-size": 24,
+	"format": " {icon} ", 
+	"all-outputs": true,
+	"on-click": "activate",
+	"sort-by-app-id": true,
+	
+    },
+
+    "custom/lrcsnc": {
+        "exec": "/usr/bin/lrcsnc",
+        //"return-type": "json",
+	"restart-interval": 1,
+        "hide-empty-text": true,
+        "max-length": 100,
+        "tooltip": true,
+        "escape": true,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
 
     "cava": {
 	"cava_config":"~/.config/cava/config"
@@ -66,6 +86,17 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "on-click": "activate"
+        // Window rewrites omitted for brevity
+    },
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -111,7 +142,7 @@
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         //"format": "{:%e %b %Y | %H:%M:%S}",
-	"format": "{:%Y年 %m月 %d日 | %H:%M:%S}",
+	"format": "{:%H:%M:%S}",
 	"interval": 1
     },
     "cpu": {
@@ -121,13 +152,13 @@
 	"interval": 1
     },
     "memory": {
-        "format": "RAM: {used} GiB ",
+        "format": "{used} GiB",
 	"tooltip": true,
 	"interval": 1
     },
 
     "custom/gputemp": {
-	"format": "GPU: {text}°C",
+	"format": "{text}°C",
 	"exec": "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits",
 	"return-type": "stdout",
 	"restart-interval": 1
@@ -142,7 +173,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         // "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "CPU: {temperatureC}°C",
+        "format": "{temperatureC}°C",
         "format-icons": ["", "", ""],
 
 	"interval":1
@@ -184,20 +215,15 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon} | {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "alsa_output.usb-Topping_D90_MQA-00.HiFi__Headphones__sink":"D90",
+	    "alsa_output.usb-BEHRINGER_UMC204HD_192k-00.Direct__Direct__sink":""
         },
         "on-click": "pavucontrol"
     },
@@ -214,8 +240,8 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : " ⏻ ",
-	"on-click": "~/.config/rofi/powermenu/type-5/powermenu.sh"
+        "format" : "⏻",
+        "on-click": "~/.config/rofi/powermenu/type-5/powermenu.sh"
     },
     "user": {
 	"format": "{work_H}:{work_M}:{work_S}",

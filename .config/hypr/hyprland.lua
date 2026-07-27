@@ -49,11 +49,20 @@ local fileManager = "dolphin"
 --
 
 hl.workspace_rule({workspace = "1", monitor = "HDMI-A-1"})
+hl.workspace_rule({workspace = "3", monitor = "HDMI-A-1"})
+hl.workspace_rule({workspace = "5", monitor = "HDMI-A-1"})
+hl.workspace_rule({workspace = "7", monitor = "HDMI-A-1"})
+hl.workspace_rule({workspace = "9", monitor = "HDMI-A-1"})
+
+hl.workspace_rule({workspace = "2", monitor = "DP-1"})
+hl.workspace_rule({workspace = "4", monitor = "DP-1"})
+hl.workspace_rule({workspace = "6", monitor = "DP-1"})
+hl.workspace_rule({workspace = "8", monitor = "DP-1"})
 
 hl.on("hyprland.start", function() 
     hl.dispatch(hl.dsp.focus({workspace = 1}))
     --hl.exec_cmd("hyprctl dispatch workspace 1")
-    hl.exec_cmd("gslapper --fps-cap 60 -f -o \"loop no-audio\" '*' ~/Desktop/LIVEWALLPAPERS/forestdownscaled.mp4")
+    hl.exec_cmd("gslapper --fps-cap 60 -f -o \"loop no-audio\" '*' ~/Desktop/LIVEWALLPAPERS/catwintermightbeaithough.mp4")
 
     hl.exec_cmd("cliphist wipe")
 
@@ -61,7 +70,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --text image --watch cliphist store")
 
     hl.exec_cmd("waybar -c ~/.config/waybar/top.jsonc")
-    hl.exec_cmd("waybar -c ~/.config/waybar/bottom.jsonc")
+    --hl.exec_cmd("waybar -c ~/.config/waybar/bottom.jsonc")
 
     hl.exec_cmd("fcitx5")
 
@@ -85,7 +94,7 @@ hl.env("QT_IM_MODULE", "fcitx")
 hl.env("XMODIFIERS", "@im,fcitx")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
 hl.env("QT_QPA_PLATFORM", "wayland")
-hl.env("QT_QPA_PLATFORM", "xcb")
+--hl.env("QT_QPA_PLATFORM", "xcb")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -175,7 +184,7 @@ hl.curve("almostLinear",   { type = "bezier", points = { {0.5, 0.5},   {0.75, 1}
 hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1}     } })
 
 -- Default springs
-hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
+hl.curve("easy",           { type = "spring", mass = 1, stiffness = 878.5, dampening = 59.29 })
 
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
@@ -190,9 +199,9 @@ hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "
 hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
 hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3.94, spring = "easy", style = "slide" })
+--hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "slide" })
+--hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -310,11 +319,14 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
-for i = 1, 10 do
+for i = 1, 9 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
+
+hl.bind(mainMod .. " + 0", hl.dsp.workspace.toggle_special("special"))
+hl.bind(mainMod .. " + SHIFT + 0",     hl.dsp.window.move({ workspace = "special" }))
 
 hl.bind("SHIFT + TAB", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
