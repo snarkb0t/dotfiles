@@ -15,12 +15,12 @@
 	"wlr/taskbar"
     ],
     "modules-center": [
-        "clock"
+        //"custom/gputemp",
+        "clock"//,
+        //"temperature"
     ],
     "modules-right": [
-    "memory",
-	"custom/gputemp",
-	"temperature",
+    "tray",
     "pulseaudio"
     ],
     // Modules configuration
@@ -131,12 +131,11 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
+        "icons": {
+           "TelegramDesktop": "~/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        }
     },
     "clock": {
         // "timezone": "America/New_York",

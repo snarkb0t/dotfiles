@@ -15,8 +15,8 @@
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({ -- first
-    output   = "HDMI-A-1",
-    mode     = "1920x1080@74.97",
+    output   = "DP-2",
+    mode     = "1920x1080@144",
     position = "0x0",
     scale    = 1
 })
@@ -25,6 +25,13 @@ hl.monitor({ -- second
     output   = "DP-1",
     mode     = "1920x1080",
     position = "1920x0",
+    scale    = 1
+})
+
+hl.monitor({ -- third
+    output   = "HDMI-A-1",
+    mode     = "1920x1080@74.97",
+    position = "-1920x0",
     scale    = 1
 })
 
@@ -48,11 +55,11 @@ local fileManager = "dolphin"
 -- Or execute your favorite apps at launch like this:
 --
 
-hl.workspace_rule({workspace = "1", monitor = "HDMI-A-1"})
-hl.workspace_rule({workspace = "3", monitor = "HDMI-A-1"})
-hl.workspace_rule({workspace = "5", monitor = "HDMI-A-1"})
-hl.workspace_rule({workspace = "7", monitor = "HDMI-A-1"})
-hl.workspace_rule({workspace = "9", monitor = "HDMI-A-1"})
+hl.workspace_rule({workspace = "1", monitor = "DP-2"})
+hl.workspace_rule({workspace = "3", monitor = "DP-2"})
+hl.workspace_rule({workspace = "5", monitor = "DP-2"})
+hl.workspace_rule({workspace = "7", monitor = "DP-2"})
+hl.workspace_rule({workspace = "9", monitor = "DP-2"})
 
 hl.workspace_rule({workspace = "2", monitor = "DP-1"})
 hl.workspace_rule({workspace = "4", monitor = "DP-1"})
@@ -62,7 +69,6 @@ hl.workspace_rule({workspace = "8", monitor = "DP-1"})
 hl.on("hyprland.start", function() 
     hl.dispatch(hl.dsp.focus({workspace = 1}))
     --hl.exec_cmd("hyprctl dispatch workspace 1")
-    hl.exec_cmd("gslapper --fps-cap 60 -f -o \"loop no-audio\" '*' ~/Desktop/LIVEWALLPAPERS/catwintermightbeaithough.mp4")
 
     hl.exec_cmd("cliphist wipe")
 
@@ -76,8 +82,11 @@ hl.on("hyprland.start", function()
 
     hl.exec_cmd("sensors-detect --auto")
     hl.exec_cmd("swaync")
+
+    hl.exec_cmd("gslapper --fps-cap 60 -f -o \"loop no-audio\" '*' ~/Desktop/LIVEWALLPAPERS/tokyocorner.mp4")
 end)
 
+--penis
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -310,6 +319,8 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind("ALT + SPACE", hl.dsp.exec_cmd("rofi -show drun"))
 hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu | cliphist decode | wl-copy"))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp -w 0)" - | wl-copy'))
+
+hl.bind("CTRL + SHIFT + X", hl.dsp.exec_cmd("hyprctl kill"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))

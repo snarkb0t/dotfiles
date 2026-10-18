@@ -76,9 +76,9 @@ tooltip label {
 
 */
 
-.modules-center {
+/*.modules-center {
   margin: 6px 12px 6px 12px
-}
+}*/
 
 /*
 
@@ -104,7 +104,6 @@ tooltip label {
 #brightness,
 #power,
 #custom-updates,
-#tray,
 #audio,
 #privacy,
 #sound {
@@ -209,8 +208,7 @@ tooltip label {
   margin: 4px 6px 4px 6px;
 }
 
-#custom-weather,
-#tray {
+#custom-weather {
   padding: 4px 0px 4px 0px;
 }
 
